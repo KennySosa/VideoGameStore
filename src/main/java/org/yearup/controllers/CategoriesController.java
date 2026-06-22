@@ -34,10 +34,14 @@ public class CategoriesController
     }
 
     @GetMapping("{id}")
-    public Category getById(@PathVariable int id)
+    public ResponseEntity<Category> getById(@PathVariable int id)
     {
-        return categoryService.getById(id);
-    }
+        Category category = categoryService.getById(id);
+        if (category == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(category);
+    }// replaced old code with this so i get a proper 404msg when a category isnt found
 
     @GetMapping("{categoryId}/products")
     public List<Product> getProductsById(@PathVariable int categoryId)
