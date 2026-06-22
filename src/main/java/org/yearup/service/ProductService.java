@@ -56,6 +56,7 @@ public class ProductService
         existing.setSubCategory(product.getSubCategory());
         existing.setFeatured(product.isFeatured());
         existing.setImageUrl(product.getImageUrl());
+        existing.setStock(product.getStock()); // there was no stock, method is trying to called but doesnt exist
         return productRepository.save(existing);
     }
 
