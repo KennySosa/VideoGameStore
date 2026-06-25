@@ -1,0 +1,84 @@
+package org.yearup.service;
+
+import org.springframework.stereotype.Service;
+import org.yearup.models.*;
+import org.yearup.repository.OrderLineItemRepository;
+import org.yearup.repository.OrderRepository;
+
+import java.time.LocalDateTime;
+import java.util.Map;
+
+@Service
+public class OrderService
+{
+    private final OrderRepository orderRepository;
+    private final OrderLineItemRepository orderLineItemRepository;
+    private final ShoppingCartService shoppingCartService;
+    private final ProfileService profileService;
+
+    public OrderService(OrderRepository orderRepository,
+                        OrderLineItemRepository orderLineItemRepository,
+                        ShoppingCartService shoppingCartService,
+                        ProfileService profileService)
+    {
+        this.orderRepository = orderRepository;
+        this.orderLineItemRepository = orderLineItemRepository;
+        this.shoppingCartService = shoppingCartService;
+        this.profileService = profileService;
+    }
+
+    public Order checkout(int userId)
+    {
+        //get the user's shopping cart
+        ShoppingCart cart = shoppingCartService.getByUserId(userId);
+
+        //get the user's profile for the shipping address
+        Profile profile = profileService.getByUserId(userId);
+
+        //create and save the order
+        Order order = new Order();
+        order.setUserId(userId);
+        order.setDate(LocalDateTime.now());
+        order.setShippingAmount(0);
+
+        //use the profile address for shipping
+        if (profile != null)
+        {
+            order.setAddress(profile.getAddress());
+            order.setCity(profile.getCity());
+            order.setState(profile.getState());
+            order.setZip(profile.getZip());
+        }
+        else
+        {
+            order.setAddress("");
+            order.setCity("");
+            order.setState("");
+            order.setZip("");
+        }
+
+        //save the order to get the generated order_id
+        Order savedOrder = orderRepository.save(order);
+
+        //create one line item per product in the cart
+        Map<Integer, ShoppingCartItem> items = cart.getItems();
+
+        for (ShoppingCartItem cartItem : items.values())
+        {
+            OrderLineItem lineItem = new OrderLineItem();
+            lineItem.setOrderId(savedOrder.getOrderId());
+            lineItem.setProductId(cartItem.getProduct().getProductId());
+            lineItem.setSalesPrice(cartItem.getProduct().getPrice());
+            lineItem.setQuantity(cartItem.getQuantity());
+            lineItem.setDiscount(cartItem.getDiscountPercent());
+
+            orderLineItemRepository.save(lineItem);
+        }
+
+        //clear the shopping cart
+        shoppingCartService.clearCart(userId);
+
+        return savedOrder;
+    }
+}//this whole class is pretty complex as it handles 4 dif things at one time AND in order which was the hardest part ngl
+//it has to save order first, then line up the items, then clears the cart. tryin to change the order breaks program/website
