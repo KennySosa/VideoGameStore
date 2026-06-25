@@ -1,6 +1,8 @@
 package org.yearup.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import org.yearup.models.*;
 import org.yearup.repository.OrderLineItemRepository;
 import org.yearup.repository.OrderRepository;
@@ -31,6 +33,13 @@ public class OrderService
     {
         //get the user's shopping cart
         ShoppingCart cart = shoppingCartService.getByUserId(userId);
+
+
+        // Step 1.5 - check if cart is empty, if so reject the checkout
+        if (cart.getItems().isEmpty())
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot checkout with an empty cart");
+        }//when testing insomn didnt bad request when checking out with an empty cart, had to change that
 
         //get the user's profile for the shipping address
         Profile profile = profileService.getByUserId(userId);
