@@ -8,11 +8,12 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order
-{// this makes a databased map class, this help the jpa know what table to pull from
+{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private int orderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)// mysql auto increments when new order is made so mysql assings
+    //the next available id automatically, IDENTITY uses databases own auto incre feature
+    @Column(name = "order_id") //makes camelcase to snakecase so mysql understands
+    private int orderId;// data base owns the orderID so i dont have to do it manually
 
     @Column(name = "user_id")
     private int userId;
@@ -34,7 +35,8 @@ public class Order
 
     @Column(name = "shipping_amount")
     private double shippingAmount;
-
+//all these seperate @columns cuz java uses camelcase and sql uses snakecase, being explicit with it makes the mapping
+    //clear and doesnt crash or break when column names change.
     public int getOrderId() { return orderId; }
     public void setOrderId(int orderId) { this.orderId = orderId; }
 
