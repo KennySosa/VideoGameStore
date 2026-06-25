@@ -9,7 +9,7 @@ info:
     Pass it as "Authorization: Bearer {token}" on all protected requests.
     Tokens expire after 30 hours.
     Roles: ROLE_USER (standard user), ROLE_ADMIN (can manage products and categories).
-    Endpoints marked (@todo) are student assignments not yet implemented.
+    Endpoints marked (leave blank) are student assignments not yet implemented.
   version: 1.0.0
   contact:
     name: Year Up Capstone
@@ -550,8 +550,8 @@ paths:
   /categories:
     get:
       tags: [Categories]
-      summary: Get all categories (@todo)
-      description: Returns all product categories. @todo - CategoriesController.getAll() stub exists but is not implemented. The controller is also missing @RestController, @RequestMapping, and @CrossOrigin annotations.
+      summary: Get all categories (leave blank)
+      description: Returns all product categories. leave blank - CategoriesController.getAll() stub exists but is not implemented. The controller is also missing @RestController, @RequestMapping, and @CrossOrigin annotations.
       operationId: getAllCategories
       security: []
       responses:
@@ -566,8 +566,8 @@ paths:
 
     post:
       tags: [Categories]
-      summary: Add category - Admin only (@todo)
-      description: Create a new category. Requires ROLE_ADMIN. @todo - CategoriesController.addCategory() stub exists but is not implemented.
+      summary: Add category - Admin only (leave blank)
+      description: Create a new category. Requires ROLE_ADMIN. leave blank - CategoriesController.addCategory() stub exists but is not implemented.
       operationId: addCategory
       security:
         - bearerAuth: []
@@ -592,8 +592,8 @@ paths:
   /categories/{id}:
     get:
       tags: [Categories]
-      summary: Get category by ID (@todo)
-      description: Returns a single category by ID. @todo - CategoriesController.getById() stub exists but is not implemented.
+      summary: Get category by ID (leave blank)
+      description: Returns a single category by ID. leave blank - CategoriesController.getById() stub exists but is not implemented.
       operationId: getCategoryById
       security: []
       parameters:
@@ -615,8 +615,8 @@ paths:
 
     put:
       tags: [Categories]
-      summary: Update category - Admin only (@todo)
-      description: Update a category by ID. Requires ROLE_ADMIN. @todo - CategoriesController.updateCategory() stub exists but is not implemented.
+      summary: Update category - Admin only (leave blank)
+      description: Update a category by ID. Requires ROLE_ADMIN. leave blank - CategoriesController.updateCategory() stub exists but is not implemented.
       operationId: updateCategory
       security:
         - bearerAuth: []
@@ -644,8 +644,8 @@ paths:
 
     delete:
       tags: [Categories]
-      summary: Delete category - Admin only (@todo)
-      description: Delete a category by ID. Requires ROLE_ADMIN. @todo - CategoriesController.deleteCategory() stub exists but is not implemented.
+      summary: Delete category - Admin only (leave blank)
+      description: Delete a category by ID. Requires ROLE_ADMIN. leave blank - CategoriesController.deleteCategory() stub exists but is not implemented.
       operationId: deleteCategory
       security:
         - bearerAuth: []
@@ -668,8 +668,8 @@ paths:
   /categories/{categoryId}/products:
     get:
       tags: [Categories]
-      summary: Get products in a category (@todo)
-      description: Returns all products belonging to the given category. @todo - CategoriesController.getProductsById() stub exists but is not implemented.
+      summary: Get products in a category (leave blank)
+      description: Returns all products belonging to the given category. leave blank - CategoriesController.getProductsById() stub exists but is not implemented.
       operationId: getProductsByCategory
       security: []
       parameters:
@@ -696,8 +696,8 @@ paths:
   /cart:
     get:
       tags: [Shopping Cart]
-      summary: Get current user's cart (@todo)
-      description: Returns the full shopping cart for the logged-in user, including all items and the computed total. @todo - ShoppingCartController.getCart() stub exists but is not implemented. Controller is also missing @RestController, @RequestMapping, and @CrossOrigin annotations.
+      summary: Get current user's cart (leave blank)
+      description: Returns the full shopping cart for the logged-in user, including all items and the computed total. leave blank - ShoppingCartController.getCart() stub exists but is not implemented. Controller is also missing @RestController, @RequestMapping, and @CrossOrigin annotations.
       operationId: getCart
       security:
         - bearerAuth: []
@@ -713,8 +713,8 @@ paths:
 
     delete:
       tags: [Shopping Cart]
-      summary: Clear cart (@todo)
-      description: Deletes all items from the current user's cart. @todo - ShoppingCartController clear cart method is not yet implemented.
+      summary: Clear cart (leave blank)
+      description: Deletes all items from the current user's cart. leave blank - ShoppingCartController clear cart method is not yet implemented.
       operationId: clearCart
       security:
         - bearerAuth: []
@@ -727,8 +727,8 @@ paths:
   /cart/products/{productId}:
     post:
       tags: [Shopping Cart]
-      summary: Add product to cart (@todo)
-      description: Adds a product to the cart with quantity 1. If the product is already in the cart, increments the quantity by 1. No request body needed - the product ID is in the URL. @todo - ShoppingCartController add-product method is not yet implemented.
+      summary: Add product to cart (leave blank)
+      description: Adds a product to the cart with quantity 1. If the product is already in the cart, increments the quantity by 1. No request body needed - the product ID is in the URL. leave blank - ShoppingCartController add-product method is not yet implemented.
       operationId: addProductToCart
       security:
         - bearerAuth: []
@@ -754,8 +754,8 @@ paths:
 
     put:
       tags: [Shopping Cart]
-      summary: Update cart item quantity (@todo)
-      description: Sets a new quantity for a product already in the cart. The product must already be in the cart. @todo - ShoppingCartController update-item method is not yet implemented.
+      summary: Update cart item quantity (leave blank)
+      description: Sets a new quantity for a product already in the cart. The product must already be in the cart. leave blank - ShoppingCartController update-item method is not yet implemented.
       operationId: updateCartItem
       security:
         - bearerAuth: []
@@ -792,8 +792,8 @@ paths:
   /profile:
     get:
       tags: [Profile]
-      summary: Get current user's profile (@todo)
-      description: Returns the profile for the currently logged-in user. @todo - ProfileController is not yet implemented.
+      summary: Get current user's profile (leave blank)
+      description: Returns the profile for the currently logged-in user. leave blank - ProfileController is not yet implemented.
       operationId: getProfile
       security:
         - bearerAuth: []
@@ -809,8 +809,8 @@ paths:
 
     put:
       tags: [Profile]
-      summary: Update current user's profile (@todo)
-      description: Updates the profile for the currently logged-in user. @todo - ProfileController is not yet implemented.
+      summary: Update current user's profile (leave blank)
+      description: Updates the profile for the currently logged-in user. leave blank - ProfileController is not yet implemented.
       operationId: updateProfile
       security:
         - bearerAuth: []
@@ -835,8 +835,8 @@ paths:
   /orders:
     post:
       tags: [Orders]
-      summary: Checkout - create order from cart (@todo)
-      description: Converts the current user's shopping cart into a new order. Creates a record in the orders table and one order line item per cart item, then clears the cart. No request body required. @todo - OrdersController does not yet exist and must be created from scratch.
+      summary: Checkout - create order from cart (leave blank)
+      description: Converts the current user's shopping cart into a new order. Creates a record in the orders table and one order line item per cart item, then clears the cart. No request body required. leave blank - OrdersController does not yet exist and must be created from scratch.
       operationId: checkout
       security:
         - bearerAuth: []

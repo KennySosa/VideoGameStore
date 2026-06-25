@@ -34,7 +34,7 @@ public class OrderService
         //get the user's shopping cart
         ShoppingCart cart = shoppingCartService.getByUserId(userId);
 
-
+//----------------------------------------------------------------------------------------------------------------------
         // Step 1.5 - check if cart is empty, if so reject the checkout
         if (cart.getItems().isEmpty())
         {
@@ -88,6 +88,6 @@ public class OrderService
         shoppingCartService.clearCart(userId);
 
         return savedOrder;
-    }
+    }//----------------------------------------------------------------------------------------------------------------
 }//this whole class is pretty complex as it handles 4 dif things at one time AND in order which was the hardest part ngl
 //it has to save order first, then line up the items, then clears the cart. tryin to change the order breaks program/website
