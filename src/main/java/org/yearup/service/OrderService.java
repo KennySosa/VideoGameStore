@@ -35,7 +35,7 @@ public class OrderService
         ShoppingCart cart = shoppingCartService.getByUserId(userId);
 
 //----------------------------------------------------------------------------------------------------------------------
-        // Step 1.5 - check if cart is empty, if so reject the checkout
+        //check if cart is empty, if so reject the checkout
         if (cart.getItems().isEmpty())
         {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot checkout with an empty cart");
